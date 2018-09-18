@@ -4,7 +4,7 @@ namespace Yang\Core;
 
 use Generator;
 
-interface FilterInterface
+interface IFilter
 {
     /**
      * @param mixed $input

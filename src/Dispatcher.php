@@ -6,11 +6,11 @@ use Generator;
 use InvalidArgumentException;
 use Yang\Core\Traits\Factory;
 
-class FilterDispatcher
+class Dispatcher
 {
     use Factory;
 
-    const FILTER_CLASS = FilterInterface::class;
+    const FILTER_CLASS = IFilter::class;
 
     /**
      * @var array
@@ -74,7 +74,7 @@ class FilterDispatcher
     {
         /**
          * @var Generator $generator
-         * @var FilterInterface $filter
+         * @var IFilter $filter
          */
         do {
             if (!$this->filters) {

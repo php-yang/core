@@ -3,16 +3,16 @@
 namespace Yang\Core\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Yang\Core\FilterDispatcher;
+use Yang\Core\Dispatcher;
 
 class DispatcherTest extends TestCase
 {
     public function testRun()
     {
-        $filter = (new FilterDispatcher)
-            ->appendFilter(TestFilter1::class)
-            ->appendFilter(TestFilter2::class)
-            ->appendFilter(TestFilter3::class)
+        $filter = (new Dispatcher)
+            ->appendFilter(TestIFilter1::class)
+            ->appendFilter(TestIFilter2::class)
+            ->appendFilter(TestIFilter3::class)
             ->dispatch(new Request());
 
         $response = new Response(); // generate response
