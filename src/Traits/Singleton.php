@@ -7,6 +7,9 @@ trait Singleton
 {
     use Factory;
 
+    /**
+     * @inheritdoc
+     */
     protected static function make(...$params)
     {
         return new static(...$params);

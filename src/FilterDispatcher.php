@@ -18,7 +18,7 @@ class FilterDispatcher
     protected $filters = [];
 
     /**
-     * @var array
+     * @var Generator[]
      */
     protected $generators = [];
 
