@@ -35,16 +35,22 @@ class Dispatcher
     }
 
     /**
-     * @param string $filterClass
+     * @param string|string[] $filterClasses
      * @return $this
      */
-    public function appendFilter($filterClass)
+    public function appendFilter($filterClasses)
     {
-        if (!is_subclass_of($filterClass, self::FILTER_CLASS)) {
-            throw new InvalidArgumentException('Filter class needs to implement ' . self::FILTER_CLASS);
+        if (!is_array($filterClasses)) {
+            $filterClasses = [$filterClasses];
         }
 
-        $this->filters[] = $filterClass;
+        foreach ($filterClasses as $filterClass) {
+            if (!is_subclass_of($filterClass, self::FILTER_CLASS)) {
+                throw new InvalidArgumentException('Filter class needs to implement ' . self::FILTER_CLASS);
+            }
+
+            $this->filters[] = $filterClass;
+        }
 
         return $this;
     }
