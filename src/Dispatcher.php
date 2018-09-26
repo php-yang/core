@@ -45,8 +45,8 @@ class Dispatcher
         }
 
         foreach ($filterClasses as $filterClass) {
-            if (!is_subclass_of($filterClass, self::FILTER_CLASS)) {
-                throw new InvalidArgumentException("Filter class: {$filterClass} needs to implement " . self::FILTER_CLASS);
+            if (!is_subclass_of($filterClass, $this::FILTER_CLASS)) {
+                throw new InvalidArgumentException("Filter class: {$filterClass} needs to implement " . $this::FILTER_CLASS);
             }
 
             $this->filters[] = $filterClass;
