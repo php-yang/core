@@ -29,9 +29,7 @@ class Dispatcher
 
     public function __destruct()
     {
-        unset($this->filters);
-        unset($this->generators);
-        unset($this->dispatchedFilters);
+        unset($this->filters, $this->generators, $this->dispatchedFilters);
     }
 
     /**
