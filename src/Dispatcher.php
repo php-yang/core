@@ -6,6 +6,10 @@ use Generator;
 use InvalidArgumentException;
 use Yang\Core\Traits\Factory;
 
+/**
+ * Class Dispatcher
+ * @package Yang\Core
+ */
 class Dispatcher
 {
     use Factory;
@@ -13,7 +17,7 @@ class Dispatcher
     const FILTER_CLASS = IFilter::class;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $filters = [];
 
@@ -23,7 +27,7 @@ class Dispatcher
     protected $generators = [];
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $dispatchedFilters = [];
 
@@ -54,7 +58,7 @@ class Dispatcher
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getFilters()
     {
@@ -62,7 +66,7 @@ class Dispatcher
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getDispatchedFilters()
     {
@@ -71,7 +75,7 @@ class Dispatcher
 
     /**
      * @param mixed $input
-     * @param mixed $output
+     * @param null|mixed $output
      * @return $this
      */
     public function dispatch($input, $output = null)

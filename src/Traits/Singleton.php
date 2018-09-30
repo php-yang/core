@@ -2,7 +2,10 @@
 
 namespace Yang\Core\Traits;
 
-
+/**
+ * Trait Singleton
+ * @package Yang\Core\Traits
+ */
 trait Singleton
 {
     use Factory;

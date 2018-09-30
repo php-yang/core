@@ -2,6 +2,10 @@
 
 namespace Yang\Core;
 
+/**
+ * Interface IFilter
+ * @package Yang\Core
+ */
 interface IFilter
 {
     /**

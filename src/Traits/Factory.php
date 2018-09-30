@@ -2,7 +2,10 @@
 
 namespace Yang\Core\Traits;
 
-
+/**
+ * Trait Factory
+ * @package Yang\Core\Traits
+ */
 trait Factory
 {
     /**
