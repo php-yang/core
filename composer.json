@@ -25,10 +25,7 @@
     "autoload": {
         "psr-4": {
             "Yang\\Core\\": "src/"
-        },
-        "files": [
-            "src/Helpers/alias.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
