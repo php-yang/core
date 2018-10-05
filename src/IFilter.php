@@ -10,6 +10,7 @@ interface IFilter
 {
     /**
      * @param mixed $input
+     * @return void|mixed
      */
     public function invoke($input);
 }

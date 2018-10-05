@@ -8,13 +8,17 @@ class TestIFilter3 implements IFilter
 {
     /**
      * @param Request $request
+     * @return mixed|null
      */
     public function invoke($request)
     {
-        echo $request->total, PHP_EOL;
-        $request->total = 3;
-        $response = (yield $request);
-        echo $response->result, PHP_EOL;
-        $response->result = 'filter3';
+        echo __CLASS__, PHP_EOL;
+
+        $response = new Response();
+
+        $response->result = __CLASS__;
+        echo var_export($response, true), PHP_EOL;
+
+        return $response;
     }
 }

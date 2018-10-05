@@ -75,15 +75,16 @@ class Dispatcher
 
     /**
      * @param mixed $input
-     * @param null|mixed $output
-     * @return $this
+     * @return mixed
      */
-    public function dispatch($input, $output = null)
+    public function dispatch($input)
     {
         /**
          * @var Generator $generator
          * @var IFilter $filter
          */
+        $output = null;
+
         do {
             if (!$this->filters) {
                 break;
@@ -97,41 +98,35 @@ class Dispatcher
                 $filter = new $filterClass();
                 $generator = $filter->invoke($input);
                 if (!$generator instanceof Generator) {
+                    $output = $generator;
                     break;
                 }
 
                 $this->generators[] = $generator;
 
-                if (null === $input = $generator->current()) {
-                    break;
+                if (null !== $result = $generator->current()) {
+                    $input = $result;
                 }
             }
 
-            if (null !== $output) {
-                $this->fallback($output);
-            }
+            $this->fallback($output);
         } while (false);
 
-        return $this;
+        return $output;
     }
 
     /**
      * @param mixed $output
-     * @return $this
      */
-    public function fallback($output)
+    protected function fallback($output)
     {
+        if (!$this->generators) {
+            return;
+        }
+
+        $generator = end($this->generators);
         do {
-            if (!$this->generators) {
-                break;
-            }
-
-            $generator = end($this->generators);
-            do {
-                $generator->send($output);
-            } while ($generator = prev($this->generators));
-        } while (false);
-
-        return $this;
+            $generator->send($output);
+        } while ($generator = prev($this->generators));
     }
 }
