@@ -93,9 +93,14 @@ class Dispatcher
             $this->generators = [];
 
             foreach ($this->filters as $filterClass) {
-                $this->dispatchedFilters[] = $filterClass;
+                if (is_object($filterClass)) {
+                    $this->dispatchedFilters[] = get_class($filterClass);
+                    $filter = $filterClass;
+                } else {
+                    $this->dispatchedFilters[] = $filterClass;
+                    $filter = new $filterClass();
+                }
 
-                $filter = new $filterClass();
                 $generator = $filter->invoke($input);
                 if (!$generator instanceof Generator) {
                     $output = $generator;
