@@ -17,43 +17,40 @@ class Dispatcher
     const FILTER_CLASS = IFilter::class;
 
     /**
-     * @var string[]
+     * @var array
      */
     protected $filters = [];
 
-    /**
-     * @var string[]
-     */
-    protected $dispatchedFilters = [];
-
     public function __destruct()
     {
-        unset($this->filters, $this->dispatchedFilters);
+        unset($this->filters);
     }
 
     /**
-     * @param string|string[] $filterClasses
+     * @api
+     * @param string|IFilter|array $filters
      * @return $this
      */
-    public function appendFilter($filterClasses)
+    public function append($filters)
     {
-        if (!is_array($filterClasses)) {
-            $filterClasses = [$filterClasses];
+        if (!is_array($filters)) {
+            $filters = [$filters];
         }
 
-        foreach ($filterClasses as $filterClass) {
-            if (!is_subclass_of($filterClass, $this::FILTER_CLASS)) {
-                throw new InvalidArgumentException("Filter class: {$filterClass} needs to implement " . $this::FILTER_CLASS);
+        foreach ($filters as $filter) {
+            if (!is_subclass_of($filter, $this::FILTER_CLASS)) {
+                throw new InvalidArgumentException("Filter: {$filter} needs to implement " . $this::FILTER_CLASS);
             }
 
-            $this->filters[] = $filterClass;
+            $this->filters[] = $filter;
         }
 
         return $this;
     }
 
     /**
-     * @return string[]
+     * @api
+     * @return array
      */
     public function getFilters()
     {
@@ -61,14 +58,7 @@ class Dispatcher
     }
 
     /**
-     * @return string[]
-     */
-    public function getDispatchedFilters()
-    {
-        return $this->dispatchedFilters;
-    }
-
-    /**
+     * @api
      * @param mixed $input
      * @return mixed
      */
@@ -87,13 +77,9 @@ class Dispatcher
 
             $generators = [];
 
-            foreach ($this->filters as $filterClass) {
-                if (is_object($filterClass)) {
-                    $this->dispatchedFilters[] = get_class($filterClass);
-                    $filter = $filterClass;
-                } else {
-                    $this->dispatchedFilters[] = $filterClass;
-                    $filter = new $filterClass();
+            foreach ($this->filters as $filter) {
+                if (!is_object($filter)) {
+                    $filter = new $filter;
                 }
 
                 $generator = $filter->invoke($input);

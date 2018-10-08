@@ -10,9 +10,8 @@ class DispatcherTest extends TestCase
     public function testRun()
     {
         $response = (new Dispatcher)
-            ->appendFilter(TestFilter1::class)
-            ->appendFilter(new TestFilter2())
-            ->appendFilter(TestFilter3::class)
+            ->append(TestFilter1::class)
+            ->append([new TestFilter2(), TestFilter3::class])
             ->dispatch(new Request());
 
         echo '==========================================', PHP_EOL;
