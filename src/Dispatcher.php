@@ -22,18 +22,13 @@ class Dispatcher
     protected $filters = [];
 
     /**
-     * @var Generator[]
-     */
-    protected $generators = [];
-
-    /**
      * @var string[]
      */
     protected $dispatchedFilters = [];
 
     public function __destruct()
     {
-        unset($this->filters, $this->generators, $this->dispatchedFilters);
+        unset($this->filters, $this->dispatchedFilters);
     }
 
     /**
@@ -90,7 +85,7 @@ class Dispatcher
                 break;
             }
 
-            $this->generators = [];
+            $generators = [];
 
             foreach ($this->filters as $filterClass) {
                 if (is_object($filterClass)) {
@@ -107,31 +102,20 @@ class Dispatcher
                     break;
                 }
 
-                $this->generators[] = $generator;
+                $generators[] = $generator;
 
                 if (null !== $result = $generator->current()) {
                     $input = $result;
                 }
             }
 
-            $this->fallback($output);
+            if ($generator = end($generators)) {
+                do {
+                    $generator->send($output);
+                } while ($generator = prev($generators));
+            }
         } while (false);
 
         return $output;
-    }
-
-    /**
-     * @param mixed $output
-     */
-    protected function fallback($output)
-    {
-        if (!$this->generators) {
-            return;
-        }
-
-        $generator = end($this->generators);
-        do {
-            $generator->send($output);
-        } while ($generator = prev($this->generators));
     }
 }

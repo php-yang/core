@@ -4,7 +4,7 @@ namespace Yang\Core\Tests;
 
 use Yang\Core\IFilter;
 
-class TestIFilter1 implements IFilter
+class TestFilter2 implements IFilter
 {
     /**
      * @param Request $request
