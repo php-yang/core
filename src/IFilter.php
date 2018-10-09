@@ -16,7 +16,10 @@ interface IFilter
      * If you yield a IFilter object / class, will dispatch it next(looks like insert a filter next).
      *
      * 要么你yield了一个非null值，则不会继续调度下一个filter，yield的值将作为回溯值开始回溯。
-     * Or if you yield a nonnull value, will not dispatch next filter and the value bill be an output for backtrace.
+     * If you yield a nonnull value, will not dispatch next filter and the value bill be an output for backtrace.
+     *
+     * 如果你yield一个null值/或直接yield，则正常继续调度。
+     * If you yield a null value or yield directly, will dispatch next filter as normal.
      *
      * 如果你在一个filter中同时使用yield和return一个值，则return会被忽略（PHP Generator机制）。
      * If you use both yield and return value in one filter, the return keyword will be ignored(because of php generator).
