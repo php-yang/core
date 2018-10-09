@@ -79,9 +79,7 @@ class Dispatcher
 
             $filter = reset($this->filters);
             while ($filter) {
-                if (!is_object($filter)) {
-                    $filter = new $filter;
-                }
+                $filter = Object::factory($filter);
 
                 $generator = $filter->invoke($input);
                 if (!$generator instanceof Generator) {
