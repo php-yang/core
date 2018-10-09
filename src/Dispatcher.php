@@ -98,7 +98,7 @@ class Dispatcher
                 }
 
                 if (null !== $result) {
-                    $output = $generator;
+                    $output = $result;
                     break;
                 }
 
