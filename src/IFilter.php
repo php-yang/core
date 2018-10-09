@@ -24,7 +24,7 @@ interface IFilter
      * 如果你在一个filter中同时使用yield和return一个值，则return会被忽略（PHP Generator机制）。
      * If you use both yield and return value in one filter, the return keyword will be ignored(because of php generator).
      *
-     * 你可以在一个filter中使用yield和无值return（PHP Generator机制）。
+     * 你可以在一个filter中同时使用yield和无值return（PHP Generator机制）。
      * You can use both yield and void return in one filter(because of php generator).
      * @param mixed $input
      * @return mixed|void
