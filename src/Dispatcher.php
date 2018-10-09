@@ -77,7 +77,8 @@ class Dispatcher
 
             $generators = [];
 
-            foreach ($this->filters as $filter) {
+            $filter = reset($this->filters);
+            while ($filter) {
                 if (!is_object($filter)) {
                     $filter = new $filter;
                 }
@@ -90,9 +91,18 @@ class Dispatcher
 
                 $generators[] = $generator;
 
-                if (null !== $result = $generator->current()) {
-                    $input = $result;
+                $result = $generator->current();
+                if (is_subclass_of($result, $this::FILTER_CLASS)) {
+                    $filter = $result;
+                    continue;
                 }
+
+                if (null !== $result) {
+                    $output = $generator;
+                    break;
+                }
+
+                $filter = next($this->filters);
             }
 
             if ($generator = end($generators)) {

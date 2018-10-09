@@ -8,7 +8,7 @@ class TestFilter2 implements IFilter
 {
     /**
      * @param Request $request
-     * @return void|mixed
+     * @return mixed|void
      */
     public function invoke($request)
     {
