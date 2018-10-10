@@ -14,24 +14,22 @@ trait Factory
     private static $sharedInstances = [];
 
     /**
-     * @param mixed ...$params
      * @return static
      */
-    public static function make(...$params)
+    public static function make()
     {
-        return new static(...$params);
+        return new static();
     }
 
     /**
-     * @param mixed ...$params
      * @return static
      */
-    final public static function shared(...$params)
+    final public static function shared()
     {
         $class = get_called_class();
 
         if (!isset(self::$sharedInstances[$class])) {
-            self::$sharedInstances[$class] = static::make(...$params);
+            self::$sharedInstances[$class] = static::make();
         }
 
         return self::$sharedInstances[$class];

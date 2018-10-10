@@ -13,9 +13,9 @@ trait Singleton
     /**
      * @inheritdoc
      */
-    protected static function make(...$params)
+    protected static function make()
     {
-        return new static(...$params);
+        return new static();
     }
 
     protected function __construct()
