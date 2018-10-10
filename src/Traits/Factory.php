@@ -2,6 +2,8 @@
 
 namespace Yang\Core\Traits;
 
+use Yang\Core\Object;
+
 /**
  * Trait Factory
  * @package Yang\Core\Traits
@@ -18,7 +20,7 @@ trait Factory
      */
     public static function make()
     {
-        return new static();
+        return Object::factory(new static());
     }
 
     /**

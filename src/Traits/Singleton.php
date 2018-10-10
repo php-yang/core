@@ -2,6 +2,8 @@
 
 namespace Yang\Core\Traits;
 
+use Yang\Core\Object;
+
 /**
  * Trait Singleton
  * @package Yang\Core\Traits
@@ -15,7 +17,7 @@ trait Singleton
      */
     protected static function make()
     {
-        return new static();
+        return Object::factory(new static());
     }
 
     protected function __construct()

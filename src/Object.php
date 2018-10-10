@@ -12,7 +12,7 @@ class Object
 {
     /**
      * @param string|object $class
-     * @return object
+     * @return mixed
      */
     public static function factory($class)
     {
