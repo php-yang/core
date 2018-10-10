@@ -4,6 +4,7 @@ namespace Yang\Core;
 
 use Generator;
 use InvalidArgumentException;
+use Yang\Core\Contracts\Filter;
 use Yang\Core\Traits\Factory;
 
 /**
@@ -14,7 +15,7 @@ class Dispatcher
 {
     use Factory;
 
-    const FILTER_CLASS = IFilter::class;
+    const FILTER_CLASS = Filter::class;
 
     /**
      * @var array
@@ -28,7 +29,7 @@ class Dispatcher
 
     /**
      * @api
-     * @param string|IFilter|array $filters
+     * @param string|Filter|array $filters
      * @return $this
      */
     public function append($filters)
@@ -66,7 +67,7 @@ class Dispatcher
     {
         /**
          * @var Generator $generator
-         * @var IFilter $filter
+         * @var Filter $filter
          */
         $output = null;
 

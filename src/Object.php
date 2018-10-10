@@ -2,6 +2,8 @@
 
 namespace Yang\Core;
 
+use Yang\Core\Contracts\Injectable;
+
 /**
  * Class Object
  * @package Yang\Core
@@ -14,6 +16,12 @@ class Object
      */
     public static function factory($class)
     {
-        return is_object($class) ? $class : new $class;
+        $object = is_object($class) ? $class : new $class;
+
+        if ($object instanceof Injectable) {
+            $object->__injected() || $object->__inject();
+        }
+
+        return $object;
     }
 }

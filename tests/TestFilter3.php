@@ -2,9 +2,9 @@
 
 namespace Yang\Core\Tests;
 
-use Yang\Core\IFilter;
+use Yang\Core\Contracts\Filter;
 
-class TestFilter3 implements IFilter
+class TestFilter3 implements Filter
 {
     /**
      * @param Request $request
